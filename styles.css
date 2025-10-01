@@ -468,10 +468,10 @@ p {
 
 @keyframes scroll-left {
   0% {
-    transform: translateX(50%);
+    transform: translateX(100%);
   }
   100% {
-    transform: translate(-50%);
+    transform: translate(-100%);
   }
 }
 
