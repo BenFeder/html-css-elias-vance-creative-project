@@ -66,3 +66,35 @@ const changeColorModeButton = document.querySelector(".change-color-mode");
 if (changeColorModeButton) {
   changeColorModeButton.addEventListener("click", changeColorMode);
 }
+
+/* Parallax / reveal handler for header image so the face can be revealed when cropping occurs.
+   This adjusts translateY of the .header-bg image based on how much the header is scrolled.
+   It is subtle and clamped so it doesn't fight page scrolling. */
+const header = document.querySelector(".header");
+const headerImg = document.querySelector(".header-bg");
+if (header && headerImg) {
+  window.addEventListener(
+    "scroll",
+    () => {
+      const rect = header.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+
+      // When header is fully in view, progress is 0 -> when header top reaches top of viewport, progress 1
+      const progress = Math.min(
+        Math.max(
+          (viewportHeight - rect.top) / (viewportHeight + rect.height),
+          0
+        ),
+        1
+      );
+
+      // Map progress to translateY range: from 0% to -20% (move image up to reveal lower parts)
+      const maxTranslate = 20; // percent
+      const translateY = -maxTranslate * progress;
+
+      headerImg.style.transform = `translateY(${translateY}%)`;
+    },
+    { passive: true }
+  );
+}

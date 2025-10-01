@@ -66,13 +66,10 @@
   transform: translateY(5rem);
   margin-bottom: 8rem;
   position: relative;
-  /* header displays the profile image as a cover background with overlay */
-  background-image: url("images/personal-profile.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* fill the header elegantly */
+  /* header contains an inline image that can scroll if needed */
   min-height: 56vh;
-  overflow: visible;
+  overflow: hidden;
+  z-index: 0; /* stacking context for children */
 }
 
 /* subtle overlay to keep text readable over the photo */
@@ -82,6 +79,27 @@
   inset: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.08));
   pointer-events: none;
+  z-index: 2;
+}
+
+/* inline image inside header that is scrollable vertically if taller than container */
+.header-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill horizontally while keeping aspect */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  z-index: 1;
+}
+
+/* make the header itself allow inner scrolling when the image overflows vertically */
+.header {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* left decorative SVG to blend header into the page */
@@ -95,6 +113,7 @@
   height: 100%;
   width: 18%;
   pointer-events: none;
+  z-index: 3;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='%23f7f7f7' stop-opacity='1'/><stop offset='1' stop-color='%23ffffff' stop-opacity='0'/></linearGradient></defs><path d='M0,0 L200,0 L120,800 L0,800 Z' fill='url(%23g)'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
@@ -110,6 +129,7 @@
   height: 100%;
   width: 18%;
   pointer-events: none;
+  z-index: 3;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800' preserveAspectRatio='none'><defs><linearGradient id='g2' x1='1' x2='0' y1='0' y2='0'><stop offset='0' stop-color='%23f7f7f7' stop-opacity='1'/><stop offset='1' stop-color='%23ffffff' stop-opacity='0'/></linearGradient></defs><path d='M200,0 L0,0 L80,800 L200,800 Z' fill='url(%23g2)'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
