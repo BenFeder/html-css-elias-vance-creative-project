@@ -275,14 +275,17 @@ p {
 .social-icons {
   display: flex;
   justify-content: start;
-  align-items: start;
   margin-left: 5rem;
   gap: 1.5rem;
 }
 
-i {
+.footer i {
   color: blue;
   font-size: 2rem;
+}
+
+.footer i:hover {
+  color: purple;
 }
 
 .footer {
