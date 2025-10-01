@@ -66,3 +66,28 @@ const changeColorModeButton = document.querySelector(".change-color-mode");
 if (changeColorModeButton) {
   changeColorModeButton.addEventListener("click", changeColorMode);
 }
+
+// Make art images clickable: open the image (or its data-fullsize) in a new tab/window safely
+const artImages = document.querySelectorAll(".art-image");
+if (artImages && artImages.length) {
+  artImages.forEach((img) => {
+    img.addEventListener("click", (e) => {
+      // prefer an explicit full-size URL if provided via data-fullsize, otherwise use the image src
+      const url =
+        img.dataset && img.dataset.fullsize
+          ? img.dataset.fullsize
+          : img.src || img.getAttribute("src");
+      if (!url) return;
+
+      // create an anchor so we can set rel="noopener noreferrer" and open in a new tab safely
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      // append to DOM, click, then remove
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  });
+}

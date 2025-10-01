@@ -35,14 +35,18 @@
       </nav>
       <header class="header">
         <button class="change-color-mode">Change Color Mode</button>
-        <!-- inline header image so it can be scrolled within the header if cropped -->
-        <img
-          class="header-bg"
-          src="images/personal-profile.jpg"
-          alt="Elias Vance"
-        />
-        <div class="blend-left" aria-hidden="true"></div>
-        <div class="blend-right" aria-hidden="true"></div>
+        <!-- stage viewport: centered profile image with drapes on either side -->
+        <div class="stage-viewport">
+          <div class="curtain curtain-left" aria-hidden="true"></div>
+          <div class="stage-center" aria-hidden="false">
+            <img
+              class="stage-profile"
+              src="images/personal-profile.jpg"
+              alt="Elias Vance"
+            />
+          </div>
+          <div class="curtain curtain-right" aria-hidden="true"></div>
+        </div>
       </header>
       <div id="home" class="heading container">
         <h1>Design That Doesn't Just Work, It Connects</h1>
