@@ -1,0 +1,312 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+}
+@font-face {
+  font-family: "Roboto Condensed", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+}
+
+*,
+*::before,
+**::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1c77c3;
+  --secondary-color: #ffc947;
+  --background-color-light: #f7f7f7;
+  --text-color-dark: #191919;
+}
+
+.navbar {
+  background-color: var(--secondary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 5rem;
+}
+
+.navbar .nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  background-color: var(--secondary-color);
+}
+
+.nav-item a {
+  text-decoration: none;
+  font-size: 1.35rem;
+  color: var(--primary-color);
+}
+
+.nav-item a:hover {
+  color: blueviolet;
+}
+
+.navbar.scrolled {
+  opacity: 0.6;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--background-color-light);
+  transform: translateY(5rem);
+  margin-bottom: 8rem;
+  position: relative;
+  /* header will contain an inline img (.profile-img img) so remove background-image */
+  min-height: 50vh;
+}
+
+.profile-img {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img img {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain; /* ensure the entire image is visible */
+  display: block;
+}
+
+.change-color-mode {
+  /* fixed so it stays above the header background image */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999; /* very high to ensure visibility */
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 2.5rem;
+  width: auto;
+  min-width: 160px;
+  padding: 0.5rem 1rem;
+  background-color: var(--text-color-dark);
+  color: var(--background-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-color-mode:hover {
+  transition: ease 0.75s;
+  background-color: var(--background-color-light);
+  color: var(--text-color-dark);
+  cursor: pointer;
+  border-color: var(--text-color-dark);
+}
+
+.dark-mode {
+  background-color: var(--text-color-dark);
+  color: var(--background-color-light);
+}
+
+body {
+  margin-top: 5rem;
+  background-color: var(--background-color-light);
+  font-family: "Inter", sans-serif;
+  color: var(--text-color-dark);
+}
+
+.heading {
+  font-family: "Montserrat", sans-serif;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heading a {
+  width: fit-content;
+}
+
+.heading-image {
+  height: 700px;
+  width: auto;
+  margin-bottom: -200px;
+}
+
+h2,
+h3,
+h4 {
+  font-size: 1.25rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.about {
+  margin-top: -300px;
+}
+
+.about img {
+  height: 300px;
+  width: auto;
+}
+
+.project-image {
+  height: 300px;
+  width: auto;
+}
+
+.project {
+  height: 50vh;
+  width: auto;
+}
+
+.CTA-button {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: var(--background-color-light) 0.3s ease;
+}
+
+.CTA-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  height: 100vh;
+}
+
+.container .portfolio {
+  display: flex;
+  flex-direction: column;
+  height: 200vh;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.portfolio-heading {
+  font-size: 1.5rem;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 100vh;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 50vw;
+  padding: 3rem;
+  border: 1px solid var(--text-color-dark);
+  border-radius: 40px;
+  margin: 3rem 3rem 2rem;
+  background-color: rgb(227, 225, 217);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form textarea {
+  height: 10rem;
+  width: 100%;
+  resize: none;
+}
+
+.email-label {
+  font-weight: 600;
+}
+
+.email {
+  width: 80%;
+  height: auto;
+}
+
+.email-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.more-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200vh;
+}
+
+.art-image {
+  height: 200px;
+  width: auto;
+}
+
+.submit-button {
+  width: 100px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  margin-left: 5rem;
+  gap: 1.5rem;
+}
+
+i {
+  color: blue;
+  font-size: 2rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20vh;
+}
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+  .change-color-mode {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    left: auto;
+    width: auto;
+    min-width: 120px;
+    height: 2.25rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+}
