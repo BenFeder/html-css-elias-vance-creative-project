@@ -66,25 +66,58 @@
   transform: translateY(5rem);
   margin-bottom: 8rem;
   position: relative;
-  /* header will contain an inline img (.profile-img img) so remove background-image */
-  min-height: 50vh;
+  /* header displays the profile image as a cover background with overlay */
+  background-image: url("images/personal-profile.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* fill the header elegantly */
+  min-height: 56vh;
+  overflow: visible;
 }
 
-.profile-img {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* subtle overlay to keep text readable over the photo */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.08));
+  pointer-events: none;
 }
 
-.profile-img img {
-  width: 100%;
-  height: auto;
-  max-height: 60vh;
-  object-fit: contain; /* ensure the entire image is visible */
-  display: block;
+/* left decorative SVG to blend header into the page */
+/* header ::after removed - using .blend-left and .blend-right elements instead */
+
+/* create a right-side decorative element using a pseudo-element on the header's child container */
+.header .blend-right {
+  position: absolute;
+  top: 0;
+  right: -4%;
+  height: 100%;
+  width: 18%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='%23f7f7f7' stop-opacity='1'/><stop offset='1' stop-color='%23ffffff' stop-opacity='0'/></linearGradient></defs><path d='M0,0 L200,0 L120,800 L0,800 Z' fill='url(%23g)'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0.95;
 }
+
+/* left-side decorative element */
+.header .blend-left {
+  position: absolute;
+  top: 0;
+  left: -4%;
+  height: 100%;
+  width: 18%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800' preserveAspectRatio='none'><defs><linearGradient id='g2' x1='1' x2='0' y1='0' y2='0'><stop offset='0' stop-color='%23f7f7f7' stop-opacity='1'/><stop offset='1' stop-color='%23ffffff' stop-opacity='0'/></linearGradient></defs><path d='M200,0 L0,0 L80,800 L200,800 Z' fill='url(%23g2)'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0.95;
+}
+
+/* profile image is now used as header background; inline profile-img rules removed */
 
 .change-color-mode {
   /* fixed so it stays above the header background image */
@@ -165,8 +198,39 @@ h4 {
 }
 
 .project {
-  height: 50vh;
-  width: auto;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  margin: 0 auto 1rem auto;
+  background: transparent;
+}
+
+/* Decorative wave separator at the bottom of each project */
+.project::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -60px;
+  height: 120px; /* larger so wave is clearly visible */
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  opacity: 0.95;
+  box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.08);
+  /* light grey SVG wave so the swivel is visible */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'><path fill='%23dddddd' d='M0,160L48,149.3C96,139,192,117,288,133.3C384,149,480,203,576,213.3C672,224,768,192,864,165.3C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'></path></svg>");
+}
+
+/* Add spacing so the next project sits below the visible wave */
+.project + .project {
+  margin-top: 0.75rem; /* tighter spacing */
 }
 
 .CTA-button {
@@ -184,14 +248,17 @@ h4 {
 
 .container {
   max-width: 1200px;
-  margin: 3rem auto;
-  height: 100vh;
+  margin: 0 auto;
+  padding: 2rem 0;
+  height: auto;
 }
 
-.container .portfolio {
+.portfolio {
   display: flex;
   flex-direction: column;
-  height: 200vh;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
 
 p {
@@ -206,21 +273,21 @@ p {
 .contact {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-top: 100vh;
+  gap: 1.25rem;
+  margin-top: 2rem; /* bring contact closer to previous section */
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 50vw;
-  padding: 3rem;
+  padding: 2rem;
   border: 1px solid var(--text-color-dark);
-  border-radius: 40px;
-  margin: 3rem 3rem 2rem;
+  border-radius: 24px;
+  margin: 1rem 1rem 1rem;
   background-color: rgb(227, 225, 217);
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .contact-form textarea {
@@ -244,17 +311,33 @@ p {
 }
 
 .more-images {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 1rem; /* small gap under contact */
+}
+
+.image-track {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-top: -200vh;
+  width: fit-content;
+  animation: scroll-left 10s linear infinite;
 }
 
 .art-image {
   height: 200px;
-  width: auto;
+  margin: 5px 10px;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translate(-50%);
+  }
 }
 
 .submit-button {
@@ -292,7 +375,7 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-top: 20vh;
+  margin-top: 2rem;
 }
 
 /* Responsive Design for Mobile Devices */

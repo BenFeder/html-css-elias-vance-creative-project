@@ -14,7 +14,13 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      rel="stylesheet"
+    />
     <title>Elias Vance</title>
   </head>
   <body>
@@ -29,9 +35,8 @@
       </nav>
       <header class="header">
         <button class="change-color-mode">Change Color Mode</button>
-        <div class="profile-img">
-          <img src="images/personal-profile.jpg" alt="Elias Vance profile" />
-        </div>
+        <div class="blend-left" aria-hidden="true"></div>
+        <div class="blend-right" aria-hidden="true"></div>
       </header>
       <div id="home" class="heading container">
         <h1>Design That Doesn't Just Work, It Connects</h1>
@@ -40,14 +45,14 @@
           Experiences
         </p>
         <a href="#portfolio" class="CTA-button">View My Work</a>
-    <img class="project-image heading-image"src="images/creative-site.jpg" /> 
-    </div>
+        <img
+          class="project-image heading-image"
+          src="images/creative-site.jpg"
+        />
+      </div>
       <div id="about" class="about container">
         <h2>About Elias Vance</h2>
-        <img
-          src="images/about-us.jpg"
-          alt="Elias Vance"
-        />
+        <img src="images/about-us.jpg" alt="Elias Vance" />
         <p>
           For the past 8 years, I've been transforming complex business
           challenges into intuitive, beautiful interfaces. I believe the best
@@ -70,14 +75,14 @@
         <h2 class="portfolio-heading">
           <strong>Selected Works</strong>
         </h2>
-        <img class="project-image"src="images/portfolio-image.jpg" />
+        <img class="project-image" src="images/portfolio-image.jpg" />
         <div class="project-1 project">
           <h3>Zenith Finance Redesign</h3>
           <p>
             A responsive redesign of a legacy banking platform, focusing on
             simplified navigation and mobile accessibility.
           </p>
-          <img class="project-image"src="images/finance-project.jpg" />
+          <img class="project-image" src="images/finance-project.jpg" />
         </div>
         <div class="project-2 project">
           <h3>Solara E-Commerce App</h3>
@@ -85,7 +90,7 @@
             Designing a multi-platform shopping experience with an emphasis on
             lightning-fast performance and an engaging checkout flow.
           </p>
-          <img class="project-image"src="images/e-commerce-project.jpg" />
+          <img class="project-image" src="images/e-commerce-project.jpg" />
         </div>
         <div class="project-3 project">
           <h3>The Civic Dashboard</h3>
@@ -93,37 +98,60 @@
             Prototyping an internal data visualization tool for city planners,
             utilizing custom CSS charts and minimal visual clutter.
           </p>
-          <img class="project-image"src="images/data-vis-project.jpg" />
+          <img class="project-image" src="images/data-vis-project.jpg" />
         </div>
       </div>
       <div id="contact" class="contact">
-        <h2 class="contact-heading">
-            Let's Build Something Great
-        </h2>
-        <p>Interested in collaborating on your next digital product? Send an email or connect with me on social media.</p>
+        <h2 class="contact-heading">Let's Build Something Great</h2>
+        <p>
+          Interested in collaborating on your next digital product? Send an
+          email or connect with me on social media.
+        </p>
         <form class="contact-form">
-            <label for="email" class="email-label">Email:</label>
-            <div class="email-section"><i class="fa-solid fa-envelope fa-1g"></i><input id="email" name="email" type="email" class="email" placeholder="Your Email" required /></div>
-            <textarea id="message" name="message" class="message" placeholder="Your Message" required></textarea>
-            <button type="submit" class="submit-button">Send</button>
+          <label for="email" class="email-label">Email:</label>
+          <div class="email-section">
+            <i class="fa-solid fa-envelope fa-1g"></i
+            ><input
+              id="email"
+              name="email"
+              type="email"
+              class="email"
+              placeholder="Your Email"
+              required
+            />
+          </div>
+          <textarea
+            id="message"
+            name="message"
+            class="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit" class="submit-button">Send</button>
         </form>
-       </div>
-      <div id="contact" class="contact container">
+      </div>
+
+      <h3>More...</h3>
+      <section class="more-images">
+        <div class="image-track">
+          <img class="art-image" src="images/art-1.jpg" />
+          <img class="art-image" src="images/art-2.jpg" />
+          <img class="art-image" src="images/art-3.jpg" />
+          <img class="art-image" src="images/art-4.jpg" />
+          <img class="art-image" src="images/art-5.jpg" />
+        </div>
+      </section>
     </main>
-    <section class="more-images">
-        <h3>More...</h3>
-        <img class="art-image" src="images/art-1.jpg"/>
-        <img class="art-image" src="images/art-2.jpg"/>
-        <img class="art-image" src="images/art-3.jpg"/>
-        <img class="art-image" src="images/art-4.jpg"/>
-        <img class="art-image" src="images/art-5.jpg"/>
-    </section>
   </body>
   <footer class="footer">
     <div class="social-icons">
-            <a href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        </div>
+      <a href="https://www.linkedin.com/" target="_blank"
+        ><i class="fa-brands fa-linkedin"></i
+      ></a>
+      <a href="https://www.facebook.com/" target="_blank"
+        ><i class="fa-brands fa-facebook"></i
+      ></a>
+    </div>
     <p>&copy; 2025 Elias Vance. All rights reserved.</p>
     <script src="index.js"></script>
   </footer>
