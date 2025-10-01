@@ -519,6 +519,14 @@ p {
     width: 100%;
   }
 
+  .navbar {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
   .change-color-mode {
     position: fixed;
     top: 0.75rem;
