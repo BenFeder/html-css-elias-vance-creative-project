@@ -515,6 +515,10 @@ p {
 
 /* Responsive Design for Mobile Devices */
 @media (max-width: 768px) {
+  :root {
+    width: 100%;
+  }
+
   .change-color-mode {
     position: fixed;
     top: 0.75rem;
