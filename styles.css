@@ -1,0 +1,533 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+}
+@font-face {
+  font-family: "Roboto Condensed", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+}
+
+*,
+*::before,
+**::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1c77c3;
+  --secondary-color: #ffc947;
+  --background-color-light: #f7f7f7;
+  --text-color-dark: #191919;
+}
+
+.navbar {
+  background-color: var(--secondary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 5rem;
+}
+
+.navbar .nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  background-color: var(--secondary-color);
+}
+
+.nav-item a {
+  text-decoration: none;
+  font-size: 1.35rem;
+  color: var(--primary-color);
+}
+
+.nav-item a:hover {
+  color: blueviolet;
+}
+
+.navbar.scrolled {
+  opacity: 0.6;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--background-color-light);
+  transform: translateY(5rem);
+  margin-bottom: 8rem;
+  position: relative;
+  /* header contains an inline image that can scroll if needed */
+  min-height: 56vh;
+  overflow: hidden;
+  z-index: 0; /* stacking context for children */
+}
+
+/* subtle overlay to keep text readable over the photo */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.08));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* inline image inside header that is scrollable vertically if taller than container */
+/* legacy header-bg and blend elements removed; stage viewport + curtains applied instead */
+
+/* Stage viewport centered content with curtains */
+.stage-viewport {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 1rem;
+}
+
+.stage-center {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56vw;
+  max-width: 720px;
+  height: 44vh;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18) inset,
+    0 6px 20px rgba(0, 0, 0, 0.12);
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.06)
+  );
+  position: relative;
+  z-index: 1; /* sit behind curtains */
+}
+
+.stage-profile {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+}
+
+.curtain {
+  width: 10vw;
+  max-width: 160px;
+  min-width: 48px;
+  height: 56vh;
+  background: linear-gradient(180deg, #8b0b0b 0%, #5b0303 50%, #2f0000 100%);
+  box-shadow: inset -8px 0 20px rgba(0, 0, 0, 0.5),
+    0 14px 40px rgba(0, 0, 0, 0.18);
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  display: block;
+  position: relative;
+  z-index: 4;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  transform-origin: top center;
+  /* curtain will animate via side-specific sequence (drop then part) */
+}
+
+.curtain::before {
+  /* subtle pleats */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0 2px,
+    transparent 2px 8px
+  );
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.curtain::after {
+  /* bottom hem shadow to simulate hanging fabric */
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 4px;
+  height: 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.28));
+  filter: blur(6px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+@keyframes curtain-drop {
+  from {
+    transform: translateY(-80%) scaleY(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Combined sequence: drop into place, then part outward (left/right) */
+@keyframes curtain-seq-left {
+  0% {
+    transform: translateY(-6%) scaleY(0.8) translateX(0);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(0) scaleY(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scaleY(1) translateX(-18%);
+    opacity: 1;
+  }
+}
+
+@keyframes curtain-seq-right {
+  0% {
+    transform: translateY(-6%) scaleY(0.8) translateX(0);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(0) scaleY(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scaleY(1) translateX(18%);
+    opacity: 1;
+  }
+}
+
+/* Apply the sequence animations on load; left and right move opposite directions */
+.curtain-left {
+  animation: curtain-seq-left 2s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+.curtain-right {
+  animation: curtain-seq-right 2s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* Smaller screens: hide curtains and make stage center full-width */
+@media (max-width: 900px) {
+  .curtain {
+    display: none;
+  }
+  .stage-viewport {
+    gap: 0;
+  }
+  .stage-center {
+    width: 100%;
+    height: 40vh;
+  }
+}
+
+/* profile image is now used as header background; inline profile-img rules removed */
+
+.change-color-mode {
+  /* fixed so it stays above the header background image */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999; /* very high to ensure visibility */
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 2.5rem;
+  width: auto;
+  min-width: 160px;
+  padding: 0.5rem 1rem;
+  background-color: var(--text-color-dark);
+  color: var(--background-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-color-mode:hover {
+  transition: ease 0.75s;
+  background-color: var(--background-color-light);
+  color: var(--text-color-dark);
+  cursor: pointer;
+  border-color: var(--text-color-dark);
+}
+
+.dark-mode {
+  background-color: var(--text-color-dark);
+  color: var(--background-color-light);
+}
+
+body {
+  margin-top: 5rem;
+  background-color: var(--background-color-light);
+  font-family: "Inter", sans-serif;
+  color: var(--text-color-dark);
+}
+
+.heading {
+  font-family: "Montserrat", sans-serif;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heading a {
+  width: fit-content;
+}
+
+.heading-image {
+  height: 700px;
+  width: auto;
+  margin-bottom: -200px;
+}
+
+h2,
+h3,
+h4 {
+  font-size: 1.25rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.about {
+  margin-top: -300px;
+}
+
+.about img {
+  height: 300px;
+  width: auto;
+}
+
+.project-image {
+  height: 300px;
+  width: auto;
+}
+
+.project {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  margin: 0 auto 1rem auto;
+  background: transparent;
+}
+
+/* Decorative wave separator at the bottom of each project */
+.project::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -60px;
+  height: 120px; /* larger so wave is clearly visible */
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  opacity: 0.95;
+  box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.08);
+  /* light grey SVG wave so the swivel is visible */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'><path fill='%23dddddd' d='M0,160L48,149.3C96,139,192,117,288,133.3C384,149,480,203,576,213.3C672,224,768,192,864,165.3C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'></path></svg>");
+}
+
+/* Add spacing so the next project sits below the visible wave */
+.project + .project {
+  margin-top: 0.75rem; /* tighter spacing */
+}
+
+.CTA-button {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: var(--background-color-light) 0.3s ease;
+}
+
+.CTA-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  height: auto;
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.portfolio-heading {
+  font-size: 1.5rem;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem; /* bring contact closer to previous section */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50vw;
+  padding: 2rem;
+  border: 1px solid var(--text-color-dark);
+  border-radius: 24px;
+  margin: 1rem 1rem 1rem;
+  background-color: rgb(227, 225, 217);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form textarea {
+  height: 10rem;
+  width: 100%;
+  resize: none;
+}
+
+.email-label {
+  font-weight: 600;
+}
+
+.email {
+  width: 80%;
+  height: auto;
+}
+
+.email-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.more-images {
+  width: 100%;
+  overflow: visible; /* allow hovered images to grow outside the strip without being cropped */
+  margin-top: 1rem; /* small gap under contact */
+}
+
+.image-track {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  overflow: visible; /* ensure children can scale up without being clipped */
+  animation: scroll-left 5s linear infinite;
+}
+
+.art-image {
+  height: 200px;
+  margin: 5px 10px;
+  display: block;
+  transform-origin: center center;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+  will-change: transform;
+  cursor: pointer; /* indicate clickability */
+}
+
+.art-image:hover {
+  transform: scale(1.18);
+  z-index: 999; /* lift above neighbors and other content */
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
+  position: relative;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+.submit-button {
+  width: 100px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: start;
+  margin-left: 5rem;
+  gap: 1.5rem;
+}
+
+.footer i {
+  color: blue;
+  font-size: 2rem;
+}
+
+.footer i:hover {
+  color: purple;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+  .change-color-mode {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    left: auto;
+    width: auto;
+    min-width: 120px;
+    height: 2.25rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+}
